@@ -12,8 +12,27 @@ export class TestComponent implements OnInit {
   ngOnInit() {
   }
 
+  carOne = {
+    wheels: 4,
+    color: 'blue'
+  };
+
+  carTwo = {
+    wheels: 4,
+    color: 'blue'
+  };
+
+  arrOne = [1, 2, 3];
+  arrTwo = [1, 2, 3];
+  numOne = 3.1415;
+  numTwo = 3.1419;
+  zero = 0;
+
   add(a: number, b: number): number {
     return a + b;
   }
+
+
+
 
 }
