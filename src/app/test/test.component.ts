@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-test',
@@ -6,11 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
+  posts: Array<any>;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
+    // this.getPostsQuery$()
+    //   .subscribe(
+    //     (data: any[]) => this.posts = data
+    //   )
   }
+
 
   carOne = {
     wheels: 4,
@@ -28,10 +37,43 @@ export class TestComponent implements OnInit {
   numTwo = 3.1419;
   zero = 0;
 
+  totalVotes: number = 0;
+  voteChanged = new EventEmitter<number>();
+
+
+  upVote() {
+    this.totalVotes++;
+    this.voteChanged.emit(this.totalVotes);
+  }
+
+  downVote() {
+    this.totalVotes--;
+  }
+
   add(a: number, b: number): number {
     return a + b;
   }
 
+  multiply(a: number, b: number): number {
+    return a * b;
+  }
+
+  getPostsQuery$() {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts')
+  }
+
+  compute(n) {
+    if (n < 0) return 0;
+    return n + 1;
+  }
+
+  greet(name) {
+    return `Welcome ${ name }!!!`
+  }
+
+  getCurrencies() {
+    return ['TWD', 'EUR', 'USD'];
+  }
 
 
 
